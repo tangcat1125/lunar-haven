@@ -24,8 +24,8 @@ class LandingPageUI {
         <!-- 中央動態天球、正式鐘塔與遠處若隱若現的狼影 -->
         <div class="landing-celestial-center">
           <canvas id="landing-moon-sphere" width="180" height="180"></canvas>
-          <img class="landing-wolf-shadow" src="assets/images/wolves/wolf-scout.png" alt="" aria-hidden="true" />
-          <img class="landing-clock-tower-art" src="assets/images/landmarks/clock-tower.png" alt="月痕小鎮鐘塔" />
+          <img class="landing-wolf-shadow" src="assets/images/wolves/wolf-scout.webp" alt="" aria-hidden="true" decoding="async" />
+          <img class="landing-clock-tower-art" src="assets/images/landmarks/clock-tower.webp" alt="月痕小鎮鐘塔" decoding="async" />
         </div>
 
         <!-- 遊戲主標題 -->

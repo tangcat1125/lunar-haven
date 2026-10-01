@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/paper-effects.css?v=20260930-2">
   <link rel="stylesheet" href="css/landing.css?v=20260930-2">
-  <link rel="stylesheet" href="css/world.css?v=20261001-1">
+  <link rel="stylesheet" href="css/world.css?v=20261001-2">
   <link rel="stylesheet" href="css/hud.css?v=20261001-3">
   <link rel="stylesheet" href="css/calendar.css">
   <link rel="stylesheet" href="css/dialogue.css?v=20261001-2">
@@ -126,27 +126,27 @@
       <!-- 中景：城鎮建築群、教堂與森林 -->
       <div class="world-midground-layer">
         <div class="landmark landmark-bakery is-interactive" data-workshop="bakery" role="button" tabindex="0" aria-label="麵包工坊：開啟緊急調度">
-          <img src="assets/images/landmarks/bakery-mill.png" alt="" />
+          <img src="assets/images/landmarks/bakery-mill.webp" alt="" loading="lazy" decoding="async" />
         </div>
         <div class="landmark landmark-blacksmith is-interactive" data-workshop="blacksmith" role="button" tabindex="0" aria-label="打鐵工坊：開啟緊急調度">
-          <img src="assets/images/landmarks/blacksmith-forge.png" alt="" />
+          <img src="assets/images/landmarks/blacksmith-forge.webp" alt="" loading="lazy" decoding="async" />
         </div>
 
         <!-- 中央哥德式教堂大鐘塔 -->
         <div id="church-clock-tower">
-          <img class="landmark-image" src="assets/images/landmarks/clock-tower.png" alt="" />
+          <img class="landmark-image" src="assets/images/landmarks/clock-tower.webp" alt="" loading="eager" decoding="async" />
           <span class="tower-beacon-fire" aria-hidden="true"></span>
           <span id="tower-guard-badge" class="tower-guard-badge" aria-live="polite" style="display:none;">🏹 鐘塔守衛</span>
         </div>
 
         <div class="landmark landmark-church is-interactive" data-workshop="church" role="button" tabindex="0" aria-label="教堂藥房：開啟緊急調度">
-          <img src="assets/images/landmarks/village-church.png" alt="" />
+          <img src="assets/images/landmarks/village-church.webp" alt="" loading="lazy" decoding="async" />
         </div>
         <div class="landmark landmark-forest is-interactive" data-workshop="forest" role="button" tabindex="0" aria-label="森林採集站：開啟緊急調度">
-          <img src="assets/images/landmarks/dark-forest-moonless.png" alt="" />
+          <img src="assets/images/landmarks/dark-forest-moonless.webp" alt="" loading="lazy" decoding="async" />
         </div>
         <div id="forest-palisade" class="landmark landmark-palisade" aria-hidden="true">
-          <img src="assets/images/landmarks/forest-palisade.png" alt="" />
+          <img src="assets/images/landmarks/forest-palisade.webp" alt="" loading="lazy" decoding="async" />
         </div>
       </div>
 
@@ -220,23 +220,23 @@
   <!-- 大世界與實體 -->
   <script src="js/world/WorldScroller.js"></script>
   <script src="js/world/TownClockTower.js"></script>
-  <script src="js/entities/NPC.js?v=20261001-1"></script>
-  <script src="js/entities/CharacterManager.js?v=20260930-3"></script>
+  <script src="js/entities/NPC.js?v=20261001-2"></script>
+  <script src="js/entities/CharacterManager.js?v=20261001-1"></script>
 
   <!-- 系統機制 -->
   <script src="js/systems/ResourceEconomy.js?v=20260930-2"></script>
   <script src="js/systems/InfectionTracker.js?v=20261001-3"></script>
-  <script src="js/systems/WolfRaidSystem.js?v=20261001-1"></script>
+  <script src="js/systems/WolfRaidSystem.js?v=20261001-2"></script>
   <script src="js/systems/StoryJournal.js?v=20261001-2"></script>
   <script src="js/systems/TaskSystem.js?v=20260930-3"></script>
   <script src="js/systems/CrisisCycleSystem.js?v=20261001-3"></script>
 
   <!-- UI 視圖控制器 -->
-  <script src="js/ui/LandingPageUI.js?v=20260930-3"></script>
+  <script src="js/ui/LandingPageUI.js?v=20261001-1"></script>
   <script src="js/ui/HUDController.js?v=20261001-3"></script>
-  <script src="js/ui/DialogueBoxUI.js?v=20260930-3"></script>
+  <script src="js/ui/DialogueBoxUI.js?v=20261001-1"></script>
   <script src="js/ui/WorkshopDispatchUI.js?v=20260930-1"></script>
-  <script src="js/ui/IncidentSnapshotUI.js?v=20261001-2"></script>
+  <script src="js/ui/IncidentSnapshotUI.js?v=20261001-3"></script>
   <script src="js/ui/SettlementReportUI.js?v=20261001-2"></script>
 
   <!-- 主進入點 -->

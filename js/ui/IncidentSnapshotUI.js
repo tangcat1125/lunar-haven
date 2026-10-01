@@ -12,11 +12,11 @@ class IncidentSnapshotUI {
   show({ victims = [], victimNPCs = [], attacker = null } = {}) {
     if (!this.layer) return;
     const victim = victimNPCs[0];
-    const victimImage = victim?.getInfectedImagePath?.() || victim?.getImagePath?.() || 'assets/images/characters/standees/villager-werewolf.png';
+    const victimImage = victim?.getInfectedImagePath?.() || victim?.getImagePath?.() || 'assets/images/characters/standees/villager-werewolf.webp';
     const victimName = victim?.name || victims[0] || '鎮民';
     const attackerImage = attacker?.isWerewolf
-      ? (attacker.getWerewolfPath?.() || 'assets/images/characters/standees/villager-werewolf.png')
-      : 'assets/images/wolves/wolf-raider.png';
+      ? (attacker.getWerewolfPath?.() || 'assets/images/characters/standees/villager-werewolf.webp')
+      : 'assets/images/wolves/wolf-raider.webp';
     const attackerName = attacker?.isWerewolf ? `${attacker.name}（狼化）` : '入侵野狼';
     this.layer.innerHTML = `
       <section class="incident-snapshot-card" role="alertdialog" aria-label="野狼咬傷事件快照">

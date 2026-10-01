@@ -99,8 +99,8 @@ for (const character of allCharacters) {
     : character.category === 'townsfolk'
       ? 'characters/townsfolk'
       : 'characters';
-  const standeePath = path.join(__dirname, `../assets/images/${root}/standees/${character.id}.png`);
-  const avatarPath = path.join(__dirname, `../assets/images/${root}/avatars/${character.id}.png`);
+  const standeePath = path.join(__dirname, `../assets/images/${root}/standees/${character.id}.webp`);
+  const avatarPath = path.join(__dirname, `../assets/images/${root}/avatars/${character.id}.webp`);
   console.assert(fs.existsSync(standeePath), `${character.id} 的剪紙立繪應存在`);
   console.assert(fs.existsSync(avatarPath), `${character.id} 的剪紙頭像應存在`);
 }

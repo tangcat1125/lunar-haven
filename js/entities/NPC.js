@@ -66,30 +66,30 @@ class NPC {
   getImagePath() {
     const assetId = this.data.assetId || this.id;
     if (this.data.category === 'animal') {
-      return `assets/images/characters/animals/standees/${assetId}.png`;
+      return `assets/images/characters/animals/standees/${assetId}.webp`;
     }
     if (this.data.category === 'townsfolk') {
-      return `assets/images/characters/townsfolk/standees/${this.id}.png`;
+      return `assets/images/characters/townsfolk/standees/${this.id}.webp`;
     }
-    return `assets/images/characters/standees/${this.id}.png`;
+    return `assets/images/characters/standees/${this.id}.webp`;
   }
 
   getAvatarPath() {
     const assetId = this.data.assetId || this.id;
     if (this.data.category === 'animal') {
-      return `assets/images/characters/animals/avatars/${assetId}.png`;
+      return `assets/images/characters/animals/avatars/${assetId}.webp`;
     }
     if (this.data.category === 'townsfolk') {
-      return `assets/images/characters/townsfolk/avatars/${this.id}.png`;
+      return `assets/images/characters/townsfolk/avatars/${this.id}.webp`;
     }
-    return `assets/images/characters/avatars/${this.id}.png`;
+    return `assets/images/characters/avatars/${this.id}.webp`;
   }
 
   getWerewolfPath() {
     if (this.data.category === 'animal' && this.id.startsWith('barnaby')) {
-      return 'assets/images/characters/animals/standees/barnaby-werewolf.png';
+      return 'assets/images/characters/animals/standees/barnaby-werewolf.webp';
     }
-    return 'assets/images/characters/standees/villager-werewolf.png';
+    return 'assets/images/characters/standees/villager-werewolf.webp';
   }
 
   getInfectedImagePath() {
@@ -121,7 +121,7 @@ class NPC {
           <div class="standee-progress-fill"></div>
         </div>
         <div class="paper-card-body standee-has-image">
-          <img class="standee-char-img" src="${this.getInfectedImagePath()}" alt="${this.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <img class="standee-char-img" src="${this.getInfectedImagePath()}" alt="${this.name}" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
           <div class="paper-cut-figure" style="background-color: ${this.color}; display: none;">
             <div class="figure-head">
               <div class="figure-eyes"></div>
@@ -135,7 +135,7 @@ class NPC {
             </div>
           </div>
           <div class="werewolf-card-back">
-            <img class="werewolf-standee-img" src="${this.getWerewolfPath()}" alt="Werewolf" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <img class="werewolf-standee-img" data-src="${this.getWerewolfPath()}" alt="Werewolf" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="werewolf-figure" style="display: none;">🐺</div>
           </div>
         </div>
@@ -364,13 +364,19 @@ class NPC {
   }
 
   updatePosition() {
-    if (this.el) {
-      this.el.style.left = `${this.x}px`;
+    const pixelX = Math.round(this.x);
+    if (this.el && pixelX !== this.renderedX) {
+      this.renderedX = pixelX;
+      this.el.style.left = `${pixelX}px`;
     }
   }
 
   updateVerticalPosition() {
-    if (this.el) this.el.style.top = `${this.baseY}px`;
+    const pixelY = Math.round(this.baseY);
+    if (this.el && pixelY !== this.renderedY) {
+      this.renderedY = pixelY;
+      this.el.style.top = `${pixelY}px`;
+    }
   }
 
   getOutsideX(side) {
@@ -563,11 +569,18 @@ class NPC {
   transformToWerewolf() {
     this.isWerewolf = true;
     this.state = 'WEREWOLF';
+    this.loadWerewolfArt();
     this.el.classList.add('is-werewolf-flip');
     if (window.soundEngine) {
       window.soundEngine.playCardFlip();
       window.soundEngine.playWolfHowl();
     }
+  }
+
+  // 狼人背面僅在實際異變時才解碼，避免所有待機角色在開場就吃掉記憶體。
+  loadWerewolfArt() {
+    const image = this.el?.querySelector('.werewolf-standee-img');
+    if (image && !image.getAttribute('src')) image.src = image.dataset.src || this.getWerewolfPath();
   }
 
   suppressWerewolf() {

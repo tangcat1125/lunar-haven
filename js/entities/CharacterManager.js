@@ -8,6 +8,7 @@ class CharacterManager {
     this.npcs = new Map();
     this.pedestrians = [];
     this.maxVisibleResidents = 6;
+    this.crowdCheckElapsed = 0;
   }
 
   init() {
@@ -84,8 +85,13 @@ class CharacterManager {
       if (npc.isPresent) npc.tick(dt);
     }
 
-    this.resolveCrowdTurnarounds();
-    this.separateNearbyNPCs();
+    // 碰撞檢查不需要每一個畫面幀都跑；降低至每秒約七次可減少排序與樣式重算。
+    this.crowdCheckElapsed += dt;
+    if (this.crowdCheckElapsed >= 0.14) {
+      this.crowdCheckElapsed = 0;
+      this.resolveCrowdTurnarounds();
+      this.separateNearbyNPCs();
+    }
 
     // 背景路人輕微踱步
     this.pedestrians.forEach(p => {

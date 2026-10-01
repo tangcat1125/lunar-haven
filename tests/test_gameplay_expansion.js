@@ -17,16 +17,16 @@ const requiredAssets = [
   'assets/audio/voice/church-bell.mp3',
   'assets/audio/voice/arrow-shot.mp3',
   'assets/audio/music/watchmans-toll.mp3',
-  'assets/images/wolves/wolf-scout.png',
-  'assets/images/wolves/wolf-raider.png',
-  'assets/images/wolves/wolf-alpha.png',
-  'assets/images/landmarks/forest-palisade.png',
+  'assets/images/wolves/wolf-scout.webp',
+  'assets/images/wolves/wolf-raider.webp',
+  'assets/images/wolves/wolf-alpha.webp',
+  'assets/images/landmarks/forest-palisade.webp',
   'assets/images/ui/chronicle-book.webp',
   'assets/images/ui/learning-parchment.webp',
   'assets/images/landing/landing-village-bottom.webp',
-  'assets/images/backgrounds/world-panorama-no-church.png',
-  'assets/images/characters/animals/standees/barnaby-werewolf.png',
-  'assets/images/characters/standees/villager-werewolf.png'
+  'assets/images/backgrounds/world-panorama-no-church.webp',
+  'assets/images/characters/animals/standees/barnaby-werewolf.webp',
+  'assets/images/characters/standees/villager-werewolf.webp'
 ];
 requiredAssets.forEach(rel => assert(fs.existsSync(path.join(root, rel)), `資產存在：${rel}`));
 
@@ -64,6 +64,8 @@ assert(workshopUi.includes('workshop_bake_rations') && workshopUi.includes('work
 const npc = read('js/entities/NPC.js');
 assert(npc.includes('summonForWorkshop') && npc.includes('this.setPresent(true)'), '工坊只召回既有 NPC，不建立重複角色');
 assert(npc.includes('getWerewolfPath') && npc.includes('getInfectedImagePath'), '受咬守犬與狼化居民會切換為專屬狀態立繪');
+assert(npc.includes('loadWerewolfArt') && npc.includes('data-src="${this.getWerewolfPath()}"'), '狼人立繪只在異變時載入，避免待機 NPC 預載隱藏大圖');
+assert(npc.includes('pixelX !== this.renderedX') && npc.includes('pixelY !== this.renderedY'), 'NPC 像素座標未改變時不重複寫入 DOM 樣式');
 
 const resourceEconomy = read('js/systems/ResourceEconomy.js');
 assert(resourceEconomy.includes('water: 2'), '資源系統包含教堂清水');
@@ -91,6 +93,7 @@ assert(crisis.includes('isFullMoonCrisisPeriod(day)') && crisis.includes('lastFu
 
 const manager = read('js/entities/CharacterManager.js');
 assert(manager.includes("id: 'barnaby_patrol_2'") && manager.includes("duplicateOf: 'barnaby'"), '只有犬隻可重複出現，且池中最多兩隻');
+assert(manager.includes('crowdCheckElapsed') && manager.includes('>= 0.14'), 'NPC 避讓運算已節流，避免每個畫面更新都重算全體碰撞');
 
 const infection = read('js/systems/InfectionTracker.js');
 assert(infection.includes('healing_potion: 1, medicine: 1, bandage: 1'), '禱告治療消耗藥水、藥品與紗布');

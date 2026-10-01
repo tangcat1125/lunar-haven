@@ -63,7 +63,7 @@ class WolfRaidSystem {
       el.className = `raid-wolf ${detected ? 'is-detected' : 'is-concealed'} ${id}`;
       el.style.left = `${2860 + i * 135}px`;
       el.style.top = `${555 + (i % 3) * 18}px`;
-      el.innerHTML = `<img src="assets/images/wolves/${id}.png" alt="入侵野狼" />`;
+      el.innerHTML = `<img src="assets/images/wolves/${id}.webp" alt="入侵野狼" decoding="async" />`;
       this.container.appendChild(el);
       this.activeWolves.push({ el, x: 2860 + i * 135, speed: 330 + i * 35 });
     }

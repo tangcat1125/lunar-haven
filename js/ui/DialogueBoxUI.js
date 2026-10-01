@@ -92,7 +92,7 @@ class DialogueBoxUI {
       ? npc.getWerewolfPath()
       : (npc.isInfected && npc.data.category === 'animal' && npc.getInfectedImagePath
         ? npc.getInfectedImagePath()
-        : (npc.getAvatarPath ? npc.getAvatarPath() : `assets/images/characters/avatars/${npc.id}.png`));
+        : (npc.getAvatarPath ? npc.getAvatarPath() : `assets/images/characters/avatars/${npc.id}.webp`));
     this.standeeCardEl.innerHTML = `
       <div class="thick-card-border">
         ${scratchHtml}

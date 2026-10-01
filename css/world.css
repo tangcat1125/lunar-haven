@@ -88,7 +88,7 @@
   left: 0;
   width: 100%;
   height: 80%;
-  background-image: url('../assets/images/backgrounds/world-panorama-no-church.png');
+  background-image: url('../assets/images/backgrounds/world-panorama-no-church.webp');
   /* 房舍集中在下方，頂部 28% 留給真實月相天空。 */
   background-size: 100% 100%;
   background-position: center bottom;
