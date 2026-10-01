@@ -1,0 +1,327 @@
+/**
+ * dialogue.css - 羊皮紙 TALKING 對話區與厚紙牌立繪滑入樣式
+ * 包含點擊角色左側滑入立繪、爪痕紫斑受傷態、選項 A/B 與台詞反饋
+ */
+#dialogue-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 12, 20, 0.45);
+  z-index: 200;
+  display: none;
+  pointer-events: auto;
+}
+
+.dialogue-interactive-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 1. 左側滑入厚紙牌大立繪 */
+#dialogue-standee-card {
+  position: absolute;
+  left: 40px;
+  bottom: 180px;
+  width: 220px;
+  height: 320px;
+  transform: translateX(-350px);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 210;
+}
+
+#dialogue-layer.is-active #dialogue-standee-card {
+  transform: translateX(0);
+}
+
+.thick-card-border {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fbf7ee;
+  border: 5px solid #ffffff;
+  border-radius: 12px;
+  box-shadow: 
+    0 8px 0 #cfc3b0,
+    0 16px 28px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.standee-portrait {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid #d7cec1;
+}
+
+.portrait-avatar {
+  font-size: 80px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.dialogue-avatar-img {
+  width: 96%;
+  height: 96%;
+  /* avatars 是獨立生成的 1:1 頭肩圖，不再用 cover 裁掉頭部。 */
+  object-fit: contain;
+  object-position: center center;
+}
+
+.standee-meta {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.standee-name {
+  margin: 0;
+  font-size: 25px;
+  color: #3e2723;
+}
+
+.standee-profession {
+  margin: 4px 0 0;
+  font-size: 16px;
+  color: #5d4037;
+  font-weight: bold;
+}
+
+.standee-profession span {
+  font-size: 14px;
+  color: #8d6e63;
+}
+
+/* 受傷感染差分：爪痕撕裂與紫斑 */
+.thick-card-border .claw-scratch-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.claw-mark {
+  position: absolute;
+  background: #b71c1c;
+  box-shadow: 0 0 4px #7f0000;
+  border-radius: 2px;
+}
+
+.claw-1 {
+  top: 40px;
+  left: 30px;
+  width: 150px;
+  height: 4px;
+  transform: rotate(-35deg);
+}
+
+.claw-2 {
+  top: 60px;
+  left: 40px;
+  width: 140px;
+  height: 5px;
+  transform: rotate(-35deg);
+}
+
+.claw-3 {
+  top: 80px;
+  left: 55px;
+  width: 125px;
+  height: 4px;
+  transform: rotate(-35deg);
+}
+
+.purple-poison-stain {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(142, 36, 170, 0.45) 0%, transparent 70%);
+}
+
+/* 2. 灰色羊皮紙 TALKING 對話區 */
+#dialogue-parchment-box {
+  position: absolute;
+  left: 280px;
+  right: 60px;
+  bottom: 40px;
+  min-height: 160px;
+  background: #ded5c4;
+  border: 3.5px solid #8d7b68;
+  border-radius: 10px;
+  box-shadow: 
+    0 6px 0 #5b4e3f,
+    0 12px 24px rgba(0, 0, 0, 0.55);
+  transform: translateY(220px);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 210;
+  padding: 16px 24px;
+  box-sizing: border-box;
+}
+
+#dialogue-layer.is-active #dialogue-parchment-box {
+  transform: translateY(0);
+}
+
+.parchment-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dialogue-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.npc-greeting {
+  font-size: 23px;
+  line-height: 1.6;
+  color: #37281a;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.dialogue-ap-badge {
+  background: #4e342e;
+  color: #ffe082;
+  border: 1px solid #ffb300;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dialogue-ap-badge strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.dialogue-warning-box {
+  background: #fce4ec;
+  border: 1.5px solid #c2185b;
+  color: #880e4f;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+/* 選項 A / 選項 B 按鈕欄 */
+.dialogue-choices-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.dialogue-choice-btn {
+  flex: 1;
+  min-width: 240px;
+  background: #f7f3e8;
+  border: 2px solid #6d543e;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 0 #6d543e;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.dialogue-choice-btn:hover {
+  background: #fffbf2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #6d543e;
+}
+
+.dialogue-choice-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #6d543e;
+}
+
+.choice-tag {
+  font-size: 20px;
+  font-weight: bold;
+  color: #8d4f1c;
+}
+
+.choice-desc {
+  font-size: 18px;
+  line-height: 1.45;
+  color: #4a3f35;
+}
+
+.choice-meta {
+  font-size: 16px;
+  color: #795548;
+  font-weight: bold;
+}
+
+.task-days-control {
+  display: grid;
+  grid-template-columns: auto minmax(100px, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  padding-top: 7px;
+  border-top: 1px dashed rgba(109, 84, 62, 0.5);
+  color: #4e342e;
+  font-size: 14px;
+  cursor: default;
+}
+
+.task-days-range {
+  width: 100%;
+  accent-color: #8d4f1c;
+  cursor: ew-resize;
+}
+
+/* 施予解藥特殊按鈕 */
+.btn-cure-action {
+  background: #e8f5e9;
+  border-color: #2e7d32;
+  box-shadow: 0 4px 0 #2e7d32;
+}
+
+.btn-cure-action .choice-tag {
+  color: #1b5e20;
+}
+
+/* 角色回饋氣泡 */
+.feedback-speech-bubble {
+  margin-top: 8px;
+  background: #424242;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+}
+
+.dialogue-werewolf-img {
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(183, 28, 28, .92));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

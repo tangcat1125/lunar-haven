@@ -1,0 +1,151 @@
+/* 整月曆：以遊戲羊皮紙卡牌風格呈現每日雙曆與月相 */
+#calendar-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 450;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 8, 18, 0.78);
+  backdrop-filter: blur(5px);
+}
+
+#calendar-modal.is-open {
+  display: flex !important;
+}
+
+.calendar-modal-card {
+  width: min(960px, calc(100vw - 28px));
+  max-height: min(760px, calc(100vh - 28px));
+  overflow: auto;
+  padding: 20px;
+  color: #f9ead1;
+  background: linear-gradient(145deg, rgba(39, 34, 31, 0.98), rgba(18, 22, 32, 0.98));
+  border: 2px solid #cbb48b;
+  border-radius: 18px;
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.calendar-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.calendar-modal-header h2 {
+  margin: 0;
+  color: #ffe082;
+  font-size: clamp(22px, 3vw, 32px);
+  letter-spacing: 2px;
+}
+
+.calendar-modal-header p {
+  margin: 5px 0 0;
+  color: #b9dff5;
+  font-size: 14px;
+}
+
+.calendar-close-btn {
+  width: 40px;
+  height: 40px;
+  color: #ffe082;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid #cbb48b;
+  border-radius: 50%;
+}
+
+.calendar-close-btn:hover,
+.calendar-close-btn:focus-visible {
+  color: #fff;
+  background: #654b2b;
+  outline: 2px solid #ffe082;
+  outline-offset: 2px;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 7px;
+  color: #9ed8f2;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-cell {
+  position: relative;
+  min-height: 104px;
+  padding: 8px;
+  overflow: hidden;
+  background: rgba(30, 43, 61, 0.9);
+  border: 1px solid rgba(203, 180, 139, 0.45);
+  border-radius: 10px;
+}
+
+.calendar-cell-empty {
+  min-height: 104px;
+  background: rgba(8, 14, 25, 0.28);
+  border-color: rgba(203, 180, 139, 0.12);
+}
+
+.calendar-cell.is-today {
+  background: linear-gradient(145deg, rgba(74, 100, 116, 0.98), rgba(49, 65, 78, 0.98));
+  border: 2px solid #ffe082;
+  box-shadow: 0 0 16px rgba(255, 224, 130, 0.28);
+}
+
+.calendar-cell.is-crisis {
+  box-shadow: inset 0 0 0 1px rgba(224, 116, 92, 0.55);
+}
+
+.calendar-gregorian-day {
+  color: #b9e8ff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar-lunar-day {
+  margin-top: 3px;
+  color: #ffe7a8;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.calendar-phase-name {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  left: 7px;
+  color: #d4dbe4;
+  font-size: 11px;
+  text-align: right;
+}
+
+.calendar-moon-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 5px auto 0;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(230, 239, 255, 0.4));
+}
+
+@media (max-width: 680px) {
+  #calendar-modal { padding: 8px; }
+  .calendar-modal-card { padding: 12px; }
+  .calendar-cell { min-height: 78px; padding: 5px; }
+  .calendar-cell-empty { min-height: 78px; }
+  .calendar-gregorian-day { font-size: 16px; }
+  .calendar-lunar-day, .calendar-phase-name { font-size: 9px; }
+  .calendar-moon-icon { width: 31px; height: 31px; }
+}

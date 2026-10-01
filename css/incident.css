@@ -1,0 +1,14 @@
+/* 狼襲快照：以童書紙雕與血痕墨跡傳達危機，避免寫實露骨傷口。 */
+.incident-snapshot-layer { position: fixed; inset: 0; z-index: 470; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(7, 9, 16, .52); }
+.incident-snapshot-card { position: relative; width: min(490px, 92vw); padding: 17px; border: 4px solid #e8dcc7; border-radius: 6px; background: #25222a; box-shadow: 0 18px 45px rgba(0,0,0,.72); transform: rotate(-1deg); }
+.incident-snapshot-label { margin: 0 0 10px; color: #ffe5c2; font-size: 20px; font-weight: 900; letter-spacing: 1px; }
+.incident-snapshot-close { position: absolute; top: 5px; right: 10px; border: 0; color: #fff0d4; background: transparent; font-size: 27px; cursor: pointer; }
+.incident-photo-frame { position: relative; height: 260px; overflow: hidden; border: 7px solid #f0e7d6; background: radial-gradient(circle at 50% 18%, #455166, #121722 74%); box-shadow: inset 0 0 35px #06080d; }
+.incident-photo-frame::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px); pointer-events: none; }
+.incident-wolf-image { position: absolute; left: -34px; bottom: -22px; width: 270px; filter: brightness(.62) saturate(.72) drop-shadow(4px 9px 7px rgba(0,0,0,.75)); transform: scaleX(-1); }
+.incident-victim-image { position: absolute; right: 10px; bottom: -18px; width: 205px; height: 252px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(177, 22, 28, .8)) brightness(.82); }
+.incident-blood-mark { position: absolute; z-index: 3; width: 88px; height: 13px; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(148, 19, 25, .94), transparent); transform: rotate(-24deg); mix-blend-mode: screen; }
+.blood-a { right: 50px; top: 66px; }.blood-b { right: 33px; top: 91px; }.blood-c { right: 67px; top: 115px; }
+.incident-flash { position: absolute; top: 20px; left: 50%; z-index: 4; color: #fff4dc; font-size: 36px; text-shadow: 0 0 12px white; animation: incident-flash .7s ease-out both; }
+.incident-caption { margin: 11px 4px 2px; color: #f7e8d0; font-size: 20px; font-weight: 700; line-height: 1.55; }
+@keyframes incident-flash { from { opacity: 1; transform: scale(2); } to { opacity: 0; transform: scale(.6); } }

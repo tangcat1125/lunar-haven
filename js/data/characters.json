@@ -1,0 +1,294 @@
+[
+  {
+    "id": "father_lawrence",
+    "name": "勞倫斯神父",
+    "englishName": "Father Lawrence",
+    "profession": "教堂神父",
+    "avatar": "lawrence",
+    "color": "#795548",
+    "speech": "好的，我知道了。願神聖的光芒庇護這座小鎮，驅散黑暗。",
+    "station": { "x": 1200, "name": "中央大教堂鐘塔" },
+    "options": [
+      {
+        "id": "task_prayer",
+        "title": "主持月光祈禱",
+        "desc": "在鐘塔下帶領禱告降低全鎮恐慌值 15 點",
+        "cost": { "food": 1 },
+        "reward": { "medicine": 2, "morale": 8 },
+        "duration": 15
+      },
+      {
+        "id": "task_silver_bell",
+        "title": "敲響驅邪聖鐘",
+        "desc": "在滿月之夜震撼狼群，降低狼人狂暴度",
+        "cost": { "silver": 1 },
+        "reward": { "defense": 20 },
+        "duration": 10
+      }
+    ]
+  },
+  {
+    "id": "brother_august",
+    "name": "奧古斯修士",
+    "englishName": "Brother August",
+    "profession": "修道院修士",
+    "avatar": "august",
+    "color": "#455a64",
+    "speech": "好的，我知道了。我這就回典籍室開爐調配草藥。",
+    "station": { "x": 1050, "name": "修道院典籍藥房" },
+    "options": [
+      {
+        "id": "task_make_antidote",
+        "title": "熬製狼毒解藥",
+        "desc": "消耗 2 株附子草調配 1 瓶狼毒淨化解藥",
+        "cost": { "aconite": 2 },
+        "reward": { "healing_potion": 2, "antidote": 1 },
+        "duration": 20
+      },
+      {
+        "id": "task_holy_water",
+        "title": "配製修道院聖水",
+        "desc": "以古法浸潤銀粉淨化水源",
+        "cost": { "silver": 1, "water": 2 },
+        "reward": { "holy_water": 2, "defense": 15 },
+        "duration": 25
+      }
+    ]
+  },
+  {
+    "id": "sister_claire",
+    "name": "克萊兒修女",
+    "englishName": "Sister Claire",
+    "profession": "修道院修女",
+    "avatar": "claire",
+    "color": "#0288d1",
+    "speech": "好的，我知道了。我這就準備乾淨的繃帶去照顧傷患。",
+    "station": { "x": 900, "name": "小鎮療養救護所" },
+    "options": [
+      {
+        "id": "task_bandage_patient",
+        "title": "傷患包紮照料",
+        "desc": "減緩被咬傷鎮民的感染蔓延速度",
+        "cost": { "food": 1 },
+        "reward": { "bandage": 2 },
+        "duration": 15
+      },
+      {
+        "id": "task_distribute_food",
+        "title": "分發救濟口糧",
+        "desc": "穩定受傷家屬情緒，提升防禦凝聚力",
+        "cost": { "food": 2 },
+        "reward": { "morale": 10 },
+        "duration": 12
+      }
+    ]
+  },
+  {
+    "id": "ellie",
+    "name": "艾莉",
+    "englishName": "Ellie",
+    "profession": "草藥女",
+    "avatar": "ellie",
+    "color": "#388e3c",
+    "speech": "好的，我知道了！我會趕在天黑前把新鮮草藥帶回來！",
+    "station": { "x": 1600, "name": "後山草藥林道" },
+    "options": [
+      {
+        "id": "task_gather_aconite",
+        "title": "採集野生附子草",
+        "desc": "深入後山危險懸崖採集 2~3 株珍貴附子草",
+        "cost": { "food": 1 },
+        "reward": { "aconite": 3 },
+        "duration": 18
+      },
+      {
+        "id": "task_gather_resin",
+        "title": "收集松脂與艾草",
+        "desc": "收集鐘塔烽火必需的易燃松脂與驅狼草",
+        "cost": {},
+        "reward": { "resin": 2 },
+        "duration": 15
+      },
+      {
+        "id": "task_fetch_water",
+        "title": "汲取山泉清水",
+        "desc": "前往林緣山泉取水，封桶後直接送進中央教堂庫房",
+        "workX": 2620,
+        "workName": "黑森林林緣山泉",
+        "cost": { "food": 1 },
+        "reward": { "water": 4 },
+        "duration": 12
+      }
+    ]
+  },
+  {
+    "id": "thomas",
+    "name": "托馬斯",
+    "englishName": "Thomas",
+    "profession": "鐵匠",
+    "avatar": "thomas",
+    "color": "#d84315",
+    "speech": "好的，我知道了！爐火正旺，我這就去敲鐵！",
+    "station": { "x": 650, "name": "小鎮石磚鐵匠鋪" },
+    "options": [
+      {
+        "id": "task_craft_fence",
+        "title": "打造鐵圍籬",
+        "desc": "消耗鐵礦與木材加固外圍拒馬柵欄",
+        "cost": { "iron": 2, "wood": 2 },
+        "reward": { "defense": 25 },
+        "duration": 22
+      },
+      {
+        "id": "task_craft_silver_sword",
+        "title": "鍛造銀質短劍",
+        "desc": "提煉銀粉打造破狼銀器裝備",
+        "cost": { "silver": 2, "iron": 1 },
+        "reward": { "silver_swords": 1 },
+        "duration": 25
+      }
+    ]
+  },
+  {
+    "id": "hans",
+    "name": "漢斯",
+    "englishName": "Hans",
+    "profession": "鐘塔守夜人",
+    "avatar": "hans",
+    "color": "#fbc02d",
+    "speech": "好的，我知道了！我這就爬上鐘塔拉緊風箱備柴！",
+    "station": { "x": 1280, "name": "鐘塔烽火瞭望台" },
+    "options": [
+      {
+        "id": "task_light_beacon",
+        "title": "點燃鐘塔大烽火",
+        "desc": "在至暗朔夜驅散陰影，全鎮視野與戒備大增",
+        "cost": { "resin": 1, "wood": 2 },
+        "reward": { "defense": 30 },
+        "duration": 15
+      },
+      {
+        "id": "task_observe_moon",
+        "title": "天幕月相觀測",
+        "desc": "觀測當前天象並記錄於天文圖鑑手冊",
+        "cost": {},
+        "reward": { "codex_progress": 1 },
+        "duration": 10
+      }
+    ]
+  },
+  {
+    "id": "raymond",
+    "name": "雷蒙",
+    "englishName": "Raymond",
+    "profession": "衛兵隊長",
+    "avatar": "raymond",
+    "color": "#5c6bc0",
+    "speech": "好的，我知道了！衛隊全員進入戒備狀態！",
+    "station": { "x": 1900, "name": "鎮口哨站拒馬" },
+    "options": [
+      {
+        "id": "task_patrol_guard",
+        "title": "前哨戒備布防",
+        "desc": "親自率領民兵巡邏鎮口阻擊黑夜狼群",
+        "cost": { "food": 2 },
+        "reward": { "defense": 20 },
+        "duration": 20
+      },
+      {
+        "id": "task_curfew_control",
+        "title": "執行滿月宵禁",
+        "desc": "滿月之夜維持治安，防止異變村民蔓延危害",
+        "cost": { "food": 1 },
+        "reward": { "morale": 10 },
+        "duration": 15
+      }
+    ]
+  },
+  {
+    "id": "bruno",
+    "name": "布魯諾",
+    "englishName": "Bruno",
+    "profession": "資源採集工",
+    "englishProfession": "Logger & Miner",
+    "avatar": "bruno",
+    "color": "#5d4037",
+    "speech": "好的，我知道了！看我天黑前把木頭與礦石全拉回來！",
+    "station": { "x": 350, "name": "採礦場與伐木營地" },
+    "options": [
+      {
+        "id": "task_chop_wood",
+        "title": "深林伐木",
+        "desc": "砍伐高山大橡木以供加固柵欄與柴火儲備",
+        "cost": { "food": 1 },
+        "reward": { "wood": 5 },
+        "duration": 18
+      },
+      {
+        "id": "task_mine_ore",
+        "title": "深入礦坑採礦",
+        "desc": "開採堅固鐵礦與珍貴銀粉礦脈",
+        "cost": { "food": 1 },
+        "reward": { "iron": 3, "silver": 1 },
+        "duration": 22
+      }
+    ]
+  },
+  {
+    "id": "silva",
+    "name": "席爾瓦",
+    "englishName": "Silva",
+    "profession": "獵手",
+    "avatar": "silva",
+    "color": "#689f38",
+    "speech": "好的，我知道了。今晚讓那些畜生見識一下冷箭的厲害。",
+    "station": { "x": 2100, "name": "黑森林狼徑隘口" },
+    "options": [
+      {
+        "id": "task_set_traps",
+        "title": "布設暗夜捕獸夾",
+        "desc": "在狼群必經隘口布夾，直接削弱野狼攻擊規模",
+        "cost": { "iron": 1 },
+        "reward": { "defense": 25 },
+        "duration": 16
+      },
+      {
+        "id": "task_scout_forest",
+        "title": "斥候狼徑偵察",
+        "desc": "探查狼群集結情資，預估朔夜來犯數量",
+        "cost": { "food": 1 },
+        "reward": { "morale": 10 },
+        "duration": 14
+      }
+    ]
+  },
+  {
+    "id": "peter",
+    "name": "彼得",
+    "englishName": "Peter",
+    "profession": "麵包師",
+    "englishProfession": "Baker",
+    "avatar": "peter",
+    "color": "#e65100",
+    "speech": "好的，我知道了！烤爐已經熱好，香噴噴的麵包馬上出爐！",
+    "station": { "x": 500, "name": "小鎮中央麵包磨坊" },
+    "options": [
+      {
+        "id": "task_bake_bread",
+        "title": "烘烤黑麥口糧",
+        "desc": "烘烤 5 份扎實的黑麥大麵包充實糧倉",
+        "cost": {},
+        "reward": { "food": 5 },
+        "duration": 15
+      },
+      {
+        "id": "task_festive_pastry",
+        "title": "特製守夜甜派",
+        "desc": "提振守夜士氣，提升居民工作效率",
+        "cost": { "food": 2 },
+        "reward": { "morale": 15 },
+        "duration": 20
+      }
+    ]
+  }
+]

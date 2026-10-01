@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>《月痕小鎮》（Lunar Haven）- 自然科學天文週期與雙曆守望遊戲</title>
+  
+  <!-- 樣式表鏈結 -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/paper-effects.css?v=20260930-2">
+  <link rel="stylesheet" href="css/landing.css?v=20260930-2">
+  <link rel="stylesheet" href="css/world.css?v=20261001-1">
+  <link rel="stylesheet" href="css/hud.css?v=20261001-3">
+  <link rel="stylesheet" href="css/calendar.css">
+  <link rel="stylesheet" href="css/dialogue.css?v=20261001-2">
+  <link rel="stylesheet" href="css/workshop.css?v=20260930-1">
+  <link rel="stylesheet" href="css/incident.css?v=20261001-3">
+  <link rel="stylesheet" href="css/teacher.css">
+  <link rel="stylesheet" href="css/codex.css?v=20261001-3">
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- 1. 入口導引網頁 (Landing Page)              -->
+  <!-- ========================================== -->
+  <div id="landing-page-container"></div>
+
+  <!-- ========================================== -->
+  <!-- 2. 主遊戲頂部 HUD 數據條                    -->
+  <!-- ========================================== -->
+  <div id="top-hud-bar">
+    <div class="resource-group">
+      <div class="res-item" title="存糧 (彼得烘焙)"><span class="res-icon">🍞</span><span id="res-food">15</span></div>
+      <div class="res-item" title="木材 (布魯諾砍伐)"><span class="res-icon">🪵</span><span id="res-wood">10</span></div>
+      <div class="res-item" title="鐵礦 (布魯諾開採)"><span class="res-icon">⛏</span><span id="res-iron">8</span></div>
+      <div class="res-item" title="銀粉 (托馬斯提煉)"><span class="res-icon">✨</span><span id="res-silver">4</span></div>
+      <div class="res-item healing-res" title="治療藥水"><span class="res-icon">🧪</span><span id="res-healing-potion">1</span></div>
+      <div class="res-item healing-res" title="修道院藥品"><span class="res-icon">🌿</span><span id="res-medicine">1</span></div>
+      <div class="res-item healing-res" title="包紮紗布"><span class="res-icon">🩹</span><span id="res-bandage">1</span></div>
+      <div class="res-item church-res" title="教堂藥草庫存"><span class="res-icon">🌱</span><span id="res-aconite">1</span></div>
+      <div class="res-item church-res" title="教堂清水庫存"><span class="res-icon">💧</span><span id="res-water">2</span></div>
+      <div class="res-item casualty-res" title="村民死傷：目前受傷、狼化或永久離鎮的村民總數"><span class="res-icon">🩸</span><span class="casualty-label">死傷</span><span id="res-casualties">0</span><span id="res-casualty-detail" class="casualty-detail">傷患 0</span></div>
+    </div>
+
+    <!-- 每日守望點數 -->
+    <div class="action-points-group" title="每日守望點數：點數耗盡不能對談，小鎮直接前進下一天">
+      <span class="ap-icon">⏳</span>
+      <span class="ap-title">守望:</span>
+      <span id="res-action-points" class="ap-value">3 / 3</span>
+    </div>
+
+    <div class="turn-countdown-group" title="本回合結束前的實際剩餘時間">
+      <span class="turn-countdown-label">回合</span>
+      <strong id="turn-countdown-value">0:25</strong>
+      <div class="turn-countdown-bar"><div id="turn-countdown-fill"></div></div>
+    </div>
+
+    <!-- 防禦警戒值 -->
+    <div class="defense-meter-group">
+      <span class="meter-title">防禦:</span>
+      <div class="defense-bar-outer">
+        <div id="defense-bar-fill"></div>
+      </div>
+      <span id="res-defense-val" class="defense-val">65%</span>
+    </div>
+
+    <!-- 課堂教學捷徑與目標設定 -->
+    <div class="hud-shortcuts">
+      <span class="hud-pill-btn goal-pill-btn" aria-live="polite"><span id="hud-goal-text">🎯 目標: 月相流程 0/15天</span></span>
+      <button id="btn-next-day" class="hud-pill-btn" title="手動前進一日（教學展示用）">⏭ 下一天</button>
+      <button id="btn-toggle-speed" class="hud-pill-btn" title="切換時間流速">⏩ 1x</button>
+      <button id="btn-end-class-session" class="hud-pill-btn end-class-btn" type="button" title="提早結束課堂並產出學習報告" style="display:none">📜 結束本局</button>
+    </div>
+    <div class="music-control" aria-label="背景音樂控制">
+      <button id="btn-bgm-toggle" class="music-toggle-btn" type="button" title="開關背景音樂">♫</button>
+      <input id="bgm-volume" type="range" min="0" max="100" value="32" aria-label="背景音樂音量">
+      <span id="bgm-volume-label">32%</span>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. 底部中央 HUD：公曆與農曆雙曆整合           -->
+  <!-- ========================================== -->
+  <div id="bottom-calendar-hud" role="button" tabindex="0" aria-label="開啟整月農曆月曆">
+    <span class="cal-gregorian">【公曆】9月29日（二）</span>
+    <span class="cal-divider">｜</span>
+    <span class="cal-lunar">【農曆】八月十九</span>
+    <span class="cal-phase-tag phase-waning_gibbous">虧凸月</span>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4.5 點擊開啟：公曆／農曆／月相整月月曆      -->
+  <!-- ========================================== -->
+  <div id="calendar-modal" class="calendar-modal" style="display:none;">
+    <section class="calendar-modal-card" role="dialog" aria-modal="true" aria-labelledby="calendar-modal-title">
+      <header class="calendar-modal-header">
+        <div>
+          <h2 id="calendar-modal-title">2026年9月</h2>
+          <p id="calendar-modal-subtitle">每日公曆、農曆與月相</p>
+        </div>
+        <button id="calendar-close" class="calendar-close-btn" type="button" aria-label="關閉月曆">×</button>
+      </header>
+      <div class="calendar-weekdays" aria-hidden="true">
+        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+      </div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </section>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. 底層長卷大世界（支援左右平滑拖曳巡視）    -->
+  <!-- ========================================== -->
+  <div id="world-viewport">
+    <div id="world-track">
+      <!-- 天幕夜空層（隨真實月相光亮動態漸層） -->
+      <div id="world-sky-layer">
+        <div id="sky-moon-disc" class="sky-realistic-moon-disc">
+          <img id="sky-moon-img" src="assets/images/moon/19.webp" alt="Moon Phase" />
+          <div class="sky-moon-aura"></div>
+        </div>
+      </div>
+
+      <!-- 遠景：阿爾卑斯雪山立體厚紙層與全景大底圖 -->
+      <div class="world-mountains-layer"></div>
+
+      <!-- 中景：城鎮建築群、教堂與森林 -->
+      <div class="world-midground-layer">
+        <div class="landmark landmark-bakery is-interactive" data-workshop="bakery" role="button" tabindex="0" aria-label="麵包工坊：開啟緊急調度">
+          <img src="assets/images/landmarks/bakery-mill.png" alt="" />
+        </div>
+        <div class="landmark landmark-blacksmith is-interactive" data-workshop="blacksmith" role="button" tabindex="0" aria-label="打鐵工坊：開啟緊急調度">
+          <img src="assets/images/landmarks/blacksmith-forge.png" alt="" />
+        </div>
+
+        <!-- 中央哥德式教堂大鐘塔 -->
+        <div id="church-clock-tower">
+          <img class="landmark-image" src="assets/images/landmarks/clock-tower.png" alt="" />
+          <span class="tower-beacon-fire" aria-hidden="true"></span>
+          <span id="tower-guard-badge" class="tower-guard-badge" aria-live="polite" style="display:none;">🏹 鐘塔守衛</span>
+        </div>
+
+        <div class="landmark landmark-church is-interactive" data-workshop="church" role="button" tabindex="0" aria-label="教堂藥房：開啟緊急調度">
+          <img src="assets/images/landmarks/village-church.png" alt="" />
+        </div>
+        <div class="landmark landmark-forest is-interactive" data-workshop="forest" role="button" tabindex="0" aria-label="森林採集站：開啟緊急調度">
+          <img src="assets/images/landmarks/dark-forest-moonless.png" alt="" />
+        </div>
+        <div id="forest-palisade" class="landmark landmark-palisade" aria-hidden="true">
+          <img src="assets/images/landmarks/forest-palisade.png" alt="" />
+        </div>
+      </div>
+
+      <!-- 近景：石磚街道與 NPC 步行活動區 -->
+      <div class="world-foreground-street">
+        <div class="street-cobblestone-pattern"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. 灰色羊皮紙 TALKING 對話區與厚紙牌立繪     -->
+  <!-- ========================================== -->
+  <div id="dialogue-layer">
+    <div class="dialogue-interactive-container">
+      <!-- 左側滑入厚紙牌大立繪 -->
+      <div id="dialogue-standee-card"></div>
+      <!-- 下方展開灰色羊皮紙對話區 -->
+      <div id="dialogue-parchment-box"></div>
+    </div>
+  </div>
+
+  <!-- 資源不足時可點建物召回對應專才；不會產生重複角色。 -->
+  <div id="workshop-dispatch-layer" class="workshop-dispatch-layer" style="display:none;">
+    <section class="workshop-dispatch-card" role="dialog" aria-modal="true" aria-labelledby="workshop-dispatch-title">
+      <button id="workshop-dispatch-close" class="workshop-dispatch-close" type="button" aria-label="關閉工坊調度">×</button>
+      <h2 id="workshop-dispatch-title"></h2>
+      <p id="workshop-dispatch-description"></p>
+      <p id="workshop-dispatch-status" class="workshop-dispatch-status"></p>
+      <div id="workshop-dispatch-options" class="workshop-dispatch-options"></div>
+    </section>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 8. 《小鎮守夜者天文手冊》結算學習單彈窗       -->
+  <!-- ========================================== -->
+  <div id="settlement-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content-body"></div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. 浮動通知橫幅                             -->
+  <!-- ========================================== -->
+  <div id="toast-container"></div>
+
+  <!-- 咬傷事件以血痕快照呈現，讓危機有可見的故事後果。 -->
+  <div id="incident-snapshot-layer" class="incident-snapshot-layer" style="display:none;"></div>
+
+  <!-- ========================================== -->
+  <!-- 10. 模組化腳本依序載入 (零 CORS，支援本機雙擊) -->
+  <!-- ========================================== -->
+  <!-- 靜態資料常數 -->
+  <script src="js/data/characters.js?v=20261001-1"></script>
+  <script src="js/data/townsfolk.js"></script>
+  <script src="js/data/townsfolkDialogues.js"></script>
+  <script src="js/data/moonPhases.js"></script>
+  <script src="js/data/teacherPresets.js"></script>
+  <script src="js/config.js"></script>
+
+  <!-- 核心引擎 -->
+  <script src="js/core/EventBus.js"></script>
+  <script src="js/core/SoundEngine.js?v=20260930-3"></script>
+  <script src="js/core/StateMachine.js"></script>
+  <script src="js/core/Storage.js"></script>
+
+  <!-- 天文曆法模組 -->
+  <script src="js/astronomy/LunarCalendar.js"></script>
+  <script src="js/astronomy/MoonPhaseCalculator.js"></script>
+  <script src="js/astronomy/SkyRenderer.js"></script>
+
+  <!-- 大世界與實體 -->
+  <script src="js/world/WorldScroller.js"></script>
+  <script src="js/world/TownClockTower.js"></script>
+  <script src="js/entities/NPC.js?v=20261001-1"></script>
+  <script src="js/entities/CharacterManager.js?v=20260930-3"></script>
+
+  <!-- 系統機制 -->
+  <script src="js/systems/ResourceEconomy.js?v=20260930-2"></script>
+  <script src="js/systems/InfectionTracker.js?v=20261001-3"></script>
+  <script src="js/systems/WolfRaidSystem.js?v=20261001-1"></script>
+  <script src="js/systems/StoryJournal.js?v=20261001-2"></script>
+  <script src="js/systems/TaskSystem.js?v=20260930-3"></script>
+  <script src="js/systems/CrisisCycleSystem.js?v=20261001-3"></script>
+
+  <!-- UI 視圖控制器 -->
+  <script src="js/ui/LandingPageUI.js?v=20260930-3"></script>
+  <script src="js/ui/HUDController.js?v=20261001-3"></script>
+  <script src="js/ui/DialogueBoxUI.js?v=20260930-3"></script>
+  <script src="js/ui/WorkshopDispatchUI.js?v=20260930-1"></script>
+  <script src="js/ui/IncidentSnapshotUI.js?v=20261001-2"></script>
+  <script src="js/ui/SettlementReportUI.js?v=20261001-2"></script>
+
+  <!-- 主進入點 -->
+  <script src="js/main.js?v=20261001-2"></script>
+
+  <!-- 全局 Toast 監聽注入 -->
+  <script>
+    if (window.lunarEventBus) {
+      function showToast(msg, type = 'normal') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = `game-toast ${type === 'crisis' ? 'crisis-toast' : type === 'success' ? 'success-toast' : ''}`;
+        toast.textContent = msg;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3500);
+      }
+
+      window.lunarEventBus.on('CRISIS_BREACHED', (d) => showToast(d.msg, 'crisis'));
+      window.lunarEventBus.on('CRISIS_DEFENDED', (d) => showToast(d.msg, 'success'));
+      window.lunarEventBus.on('VILLAGERS_BITTEN', (d) => showToast(`⚠️ 鎮民遭到狼牙撕咬：${d.victims.join('、')}！`, 'crisis'));
+      window.lunarEventBus.on('PATIENT_CURED', (d) => showToast(`✨ 已成功施予解藥淨化：${d.npc.name}！`, 'success'));
+      window.lunarEventBus.on('RESOURCE_COLLECTED', (d) => showToast(`✓ 領取完成：${d.npc.name} 交付了 ${d.task.title} 成果！`, 'success'));
+      window.lunarEventBus.on('ACTION_POINTS_EXHAUSTED', (d) => showToast(`⏳ ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('DAY_ADVANCED', (d) => showToast(`🌅 ${d.msg}`, 'success'));
+      window.lunarEventBus.on('PALISADE_BROKEN', (d) => showToast(`🪵 ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('WEREWOLF_RAMPAGE', (d) => showToast(`🐺 ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('SKY_ANOMALY_REPORTED', (d) => showToast(`☄️ ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('CHURCH_SUPPLY_DELIVERED', (d) => showToast(`⛪ ${d.npc.name}已把物資送進教堂。`, 'success'));
+      window.lunarEventBus.on('PALISADE_BUILT', (d) => showToast(`🪵 ${d.npc.name}完成了森林柵欄！`, 'success'));
+      window.lunarEventBus.on('RESOURCE_SHORTAGE', (d) => showToast(`📦 物資不足：缺少 ${Object.entries(d.missing).map(([key, value]) => `${key} ${value}`).join('、')}。點擊對應工坊可緊急調度。`, 'crisis'));
+      window.lunarEventBus.on('WORKSHOP_DISPATCHED', (d) => showToast(`⚒ ${d.npc.name}已由${d.workshop.name}緊急召集；一回合後將帶回補給。`, 'success'));
+      window.lunarEventBus.on('WOLF_HUNTED_OFFSCREEN', (d) => showToast(`🏹 ${d.msg}`, 'success'));
+      window.lunarEventBus.on('TOWER_ARCHER_SHOT', (d) => showToast(`🏹 ${d.msg}`, 'success'));
+      window.lunarEventBus.on('TOWER_ARCHER_MISSED', (d) => showToast(`🏹 ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('WEREWOLF_EXECUTED', (d) => showToast(`⚠️ ${d.msg}`, 'crisis'));
+      window.lunarEventBus.on('WANDERING_WOLF_SPOTTED', (d) => showToast(`🐺 ${d.msg}`, 'crisis'));
+    }
+  </script>
+</body>
+</html>

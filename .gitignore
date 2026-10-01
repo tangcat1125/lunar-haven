@@ -1,0 +1,13 @@
+# Local editor, system, and runtime artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+node_modules/
+npm-debug.log*
+*.log
+.env
+.env.*
+
+# Local test output
+coverage/
+dist/

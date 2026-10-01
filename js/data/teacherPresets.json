@@ -1,0 +1,56 @@
+[
+  {
+    "id": "full_synodic_cycle",
+    "name": "完整月相週期 (29.5天)",
+    "description": "跑完一整個朔望月週期（農曆初一至廿九/三十），全盤體驗八大月相流轉。",
+    "targetCycleDays": 29.5,
+    "maxCasualties": 5,
+    "timeLimitMinutes": null
+  },
+  {
+    "id": "half_cycle_climax",
+    "name": "半週期精華防禦 (初一至十五)",
+    "description": "聚焦於「朔月狼襲 ➜ 狼毒潛伏賽跑 ➜ 滿月狼人檢驗」核心因果閉環，適合 40 分鐘課堂。",
+    "targetCycleDays": 15,
+    "maxCasualties": 3,
+    "timeLimitMinutes": 40
+  },
+  {
+    "id": "casualty_strict",
+    "name": "極限守夜挑戰 (傷亡不超過 1 人)",
+    "description": "極度考驗資源調度與防禦預警，只要 1 人狼化或傷亡即結算宣告小鎮失守。",
+    "targetCycleDays": 30,
+    "maxCasualties": 1,
+    "timeLimitMinutes": null
+  },
+  {
+    "id": "defend_twice",
+    "name": "成功抵禦 2 次連續危機",
+    "description": "必須成功抵禦 1 次朔月黑夜狼襲，並成功淨化防守 1 次滿月狼人異變。",
+    "requiredDefendSuccess": 2,
+    "maxCasualties": 4,
+    "timeLimitMinutes": null
+  },
+  {
+    "id": "codex_mastery",
+    "name": "集齊 8 大月相觀察圖鑑",
+    "description": "完成所有八大月相天幕觀測記錄與農曆對照卡片收集。",
+    "requiredCodexCount": 8,
+    "maxCasualties": 5,
+    "timeLimitMinutes": null
+  },
+  {
+    "id": "timed_15_min",
+    "name": "課堂限時模式 (15分鐘)",
+    "description": "時間倒數 15 分鐘，時間截止自動鎖定並產出學習手冊報告。",
+    "timeLimitMinutes": 15,
+    "maxCasualties": 3
+  },
+  {
+    "id": "timed_30_min",
+    "name": "課堂限時模式 (30分鐘)",
+    "description": "時間倒數 30 分鐘，適合雙節課堂中段評量。",
+    "timeLimitMinutes": 30,
+    "maxCasualties": 3
+  }
+]

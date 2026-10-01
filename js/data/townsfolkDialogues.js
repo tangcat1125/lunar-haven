@@ -1,0 +1,432 @@
+/**
+ * TOWNSFOLK_DIALOGUES - 小鎮居民與動物動態劇情對白與委任資料庫
+ * 依據月相週期四大階段（PEACEFUL 平靜期、ALERT 戒備期、FULL_MOON 滿月危機、DARK_MOON 朔月至暗）
+ * 以及感染狀態（INFECTED）動態提供沉浸式情境對談與專屬委任工作。
+ * 支援本機純雙擊 index.html 離線免伺服器執行！
+ */
+window.TOWNSFOLK_DIALOGUES = {
+  "toby": {
+    "PEACEFUL": {
+      "greeting": "「大人！今天的羊群特別聽話，山坡上的草很肥美呢！您需要我幫忙做點什麼嗎？」",
+      "options": [
+        {
+          "id": "toby_firewood",
+          "title": "拾撿乾燥柴火",
+          "desc": "為鐘塔烽火與鐵匠爐補充木柴",
+          "workX": 540,
+          "workName": "磨坊柴堆",
+          "cost": {},
+          "reward": { "wood": 2 },
+          "duration": 10
+        },
+        {
+          "id": "toby_errand",
+          "title": "鎮內跑腿送信",
+          "desc": "在各工坊間傳遞消息，提振居民精神",
+          "workX": 1050,
+          "workName": "鎮中心廣場",
+          "cost": {},
+          "reward": { "morale": 6 },
+          "duration": 8
+        }
+      ]
+    },
+    "ALERT": {
+      "greeting": "「大人……昨晚月亮好亮，山崖那邊好像有影子在跑……羊群整晚都在發抖，我不敢睡覺……」",
+      "options": [
+        {
+          "id": "toby_scout",
+          "title": "登上屋頂瞭望",
+          "desc": "在鎮內矮屋頂高處巡視，偵測可疑狼影",
+          "workX": 1150,
+          "workName": "鐘樓旁矮屋頂",
+          "cost": { "food": 1 },
+          "reward": { "defense": 8 },
+          "duration": 8
+        },
+        {
+          "id": "toby_lock_sheep",
+          "title": "加固羊圈木門",
+          "desc": "用粗木樁鎖好木欄，防止野狼夜襲破門",
+          "workX": 820,
+          "workName": "小鎮後方羊棚",
+          "cost": { "wood": 1 },
+          "reward": { "defense": 10 },
+          "duration": 12
+        }
+      ]
+    },
+    "FULL_MOON": {
+      "greeting": "「滿、滿月了！天啊……大人的十字架有用嗎？我剛剛聽見黑森林裡有可怕的咆哮聲……大家會沒事吧？」",
+      "options": [
+        {
+          "id": "toby_shelter_kids",
+          "title": "指引鎮童避難",
+          "desc": "帶領小鎮孩童躲進教堂石壁地窖內",
+          "workX": 1200,
+          "workName": "中央大教堂地窖入口",
+          "cost": {},
+          "reward": { "morale": 12 },
+          "duration": 10
+        },
+        {
+          "id": "toby_ring_small_bell",
+          "title": "協助拉動警繩",
+          "desc": "幫忙守鐘人漢斯敲響低音警鐘警告全鎮",
+          "workX": 1130,
+          "workName": "鐘樓底層拉繩",
+          "cost": {},
+          "reward": { "defense": 15 },
+          "duration": 8
+        }
+      ]
+    },
+    "DARK_MOON": {
+      "greeting": "「暗月到了……外面漆黑一片，連星星都看不清楚。幸好今晚巡守的大人們點起了火把……」",
+      "options": [
+        {
+          "id": "toby_torch_patrol",
+          "title": "遞送松脂火把",
+          "desc": "為鎮口防線的衛兵送去照明松脂火把",
+          "workX": 380,
+          "workName": "西側隘口拒馬",
+          "cost": { "wood": 1 },
+          "reward": { "defense": 12 },
+          "duration": 10
+        },
+        {
+          "id": "toby_check_animals",
+          "title": "安撫鎮內牲畜",
+          "desc": "在無月黑夜中給牲口添草料，避免驚群",
+          "workX": 850,
+          "workName": "鎮東圈舍",
+          "cost": {},
+          "reward": { "morale": 8 },
+          "duration": 8
+        }
+      ]
+    },
+    "INFECTED": {
+      "greeting": "「嗚……大人……好冷……我的手臂被劃傷了，傷口泛著奇怪的紫黑色斑紋……頭好痛……我是不是要變成野獸了……」",
+      "options": []
+    }
+  },
+  "martha": {
+    "PEACEFUL": {
+      "greeting": "「守望者大人，日安。我剛剛整理完一批細亞麻布，有什麼需要我為小鎮縫製的嗎？」",
+      "options": [
+        {
+          "id": "martha_bandages",
+          "title": "裁製乾淨繃帶",
+          "desc": "使用純白麻布為修道院補充急救捲繃帶",
+          "workX": 1460,
+          "workName": "修道院藥房門廊",
+          "cost": {},
+          "reward": { "morale": 10 },
+          "duration": 10
+        },
+        {
+          "id": "martha_rations",
+          "title": "縫補禦寒斗篷",
+          "desc": "為夜巡守衛加固厚呢斗篷，增強體力",
+          "workX": 450,
+          "workName": "西側崗哨營帳",
+          "cost": { "food": 1 },
+          "reward": { "defense": 8 },
+          "duration": 12
+        }
+      ]
+    },
+    "ALERT": {
+      "greeting": "「大人，街上的氣氛越來越緊繃了……聽說神父已經在準備聖水，我正在趕製加厚皮革護腕，希望能在月圓前完成。」",
+      "options": [
+        {
+          "id": "martha_leather_bracer",
+          "title": "趕製防咬皮護腕",
+          "desc": "為衛兵與巡邏村民製作雙層防撕裂牛皮護腕",
+          "workX": 1080,
+          "workName": "裁縫作坊工作台",
+          "cost": { "iron": 1 },
+          "reward": { "defense": 15 },
+          "duration": 12
+        },
+        {
+          "id": "martha_prayer_shroud",
+          "title": "縫製聖像帷幔",
+          "desc": "為教堂掛上金線繡邊帷幔，祈求神聖庇護",
+          "workX": 1180,
+          "workName": "教堂大門走廊",
+          "cost": {},
+          "reward": { "morale": 12 },
+          "duration": 10
+        }
+      ]
+    },
+    "FULL_MOON": {
+      "greeting": "「月痕太耀眼了……連屋內都被照得慘白！大人，窗戶已經用木條釘死了，若有傷患，請隨時送來我這裡止血！」",
+      "options": [
+        {
+          "id": "martha_emergency_bandage",
+          "title": "緊急包紮傷患",
+          "desc": "協助克萊兒修女用浸泡過草藥的繃帶按壓傷口",
+          "workX": 1490,
+          "workName": "藥房前急救帳棚",
+          "cost": {},
+          "reward": { "morale": 15 },
+          "duration": 8
+        },
+        {
+          "id": "martha_distribute_cloaks",
+          "title": "分發抗寒毛毯",
+          "desc": "向地窖中的老弱婦孺發放毛毯穩定人心",
+          "workX": 1220,
+          "workName": "教堂避難所",
+          "cost": {},
+          "reward": { "morale": 12 },
+          "duration": 10
+        }
+      ]
+    },
+    "DARK_MOON": {
+      "greeting": "「至暗之夜……只要黑森林的野狼沒有衝出隘口，我們就能平安熬到天亮。大人，夜巡辛苦了，喝杯熱麥茶吧。」",
+      "options": [
+        {
+          "id": "martha_herbal_tea",
+          "title": "熬煮熱麥草茶",
+          "desc": "為寒夜中值勤的巡邏隊補充熱量與元氣",
+          "workX": 1380,
+          "workName": "階梯旁茶炊",
+          "cost": { "food": 1 },
+          "reward": { "morale": 10 },
+          "duration": 8
+        },
+        {
+          "id": "martha_curtain_blackout",
+          "title": "掛起遮光黑簾",
+          "desc": "遮蔽全鎮窗戶火光，避免在暗夜中引來嗜血狼群",
+          "workX": 950,
+          "workName": "鎮街民宅",
+          "cost": {},
+          "reward": { "defense": 12 },
+          "duration": 10
+        }
+      ]
+    },
+    "INFECTED": {
+      "greeting": "「嘶……好燙……這不是普通的抓傷！血流不止，甚至散發出泥沼腥味……大人，我不想傷害鎮上的大家……請救救我……」",
+      "options": []
+    }
+  },
+  "barnaby": {
+    "PEACEFUL": {
+      "greeting": "「汪！汪！（巴納比熱情地搖動蓬鬆的大尾巴，蹭了蹭您的長靴，喉嚨裡發出歡快的呼嚕聲）」",
+      "options": [
+        {
+          "id": "dog_patrol",
+          "title": "警惕巡嗅暗巷",
+          "desc": "憑藉靈敏嗅覺搜尋狼腥氣味，提高警戒",
+          "workX": 350,
+          "workName": "西側圍欄暗處",
+          "cost": { "food": 1 },
+          "reward": { "defense": 12 },
+          "duration": 6
+        },
+        {
+          "id": "dog_comfort",
+          "title": "撫摸忠犬鼓勵",
+          "desc": "忠犬開心地打滾，稍微撫慰小鎮緊張情緒",
+          "workX": 460,
+          "workName": "街道原處",
+          "cost": {},
+          "reward": { "morale": 6 },
+          "duration": 4
+        }
+      ]
+    },
+    "ALERT": {
+      "greeting": "「汪嗚……（巴納比豎起耳朵，雙眼警惕地盯著遠方的黑森林隘口，發出低沉的警告低鳴）」",
+      "options": [
+        {
+          "id": "dog_alert_sniff",
+          "title": "追蹤林風氣味",
+          "desc": "在木柵前仔細嗅聞逆風傳來的異變狼氣",
+          "workX": 320,
+          "workName": "西側鎮口木柵",
+          "cost": {},
+          "reward": { "defense": 15 },
+          "duration": 8
+        },
+        {
+          "id": "dog_guard_blacksmith",
+          "title": "守衛鐵匠鍛爐",
+          "desc": "寸步不離守在湯瑪斯身旁，保護正在淬火的銀器",
+          "workX": 580,
+          "workName": "鐵匠工坊門口",
+          "cost": {},
+          "reward": { "defense": 10 },
+          "duration": 8
+        }
+      ]
+    },
+    "FULL_MOON": {
+      "greeting": "「汪吼！汪！（巴納比全身背毛倒豎，對著天空中刺眼的銀色滿月狂吠，牙齒緊咬，誓死捍衛小鎮街道）」",
+      "options": [
+        {
+          "id": "dog_bark_repel",
+          "title": "吠叫震懾狼群",
+          "desc": "以響亮狂暴的犬吠回敬狼嚎，阻止狼群撲入巷道",
+          "workX": 250,
+          "workName": "鎮外前線木柵",
+          "cost": { "food": 1 },
+          "reward": { "defense": 20 },
+          "duration": 6
+        },
+        {
+          "id": "dog_protect_church",
+          "title": "退守教堂門階",
+          "desc": "擋在老弱婦孺避難的教堂大門前嚴防死守",
+          "workX": 1150,
+          "workName": "教堂大門階梯",
+          "cost": {},
+          "reward": { "defense": 16 },
+          "duration": 8
+        }
+      ]
+    },
+    "DARK_MOON": {
+      "greeting": "「嗚嗚……（無月的暗夜中，巴納比貼近您的腳邊，用鼻子輕嗅空氣，確認四周是否安全）」",
+      "options": [
+        {
+          "id": "dog_dark_patrol",
+          "title": "暗夜巡守帶路",
+          "desc": "引導持火把的衛兵穿過無燈暗巷，確保無野獸潛伏",
+          "workX": 750,
+          "workName": "鎮中陰暗小巷",
+          "cost": {},
+          "reward": { "defense": 12 },
+          "duration": 8
+        },
+        {
+          "id": "dog_feed",
+          "title": "犒賞肉乾補體",
+          "desc": "餵食一塊燻肉，讓忠犬保持充沛體力與警覺性",
+          "workX": 460,
+          "workName": "崗哨木廊",
+          "cost": { "food": 1 },
+          "reward": { "defense": 15 },
+          "duration": 4
+        }
+      ]
+    },
+    "INFECTED": {
+      "greeting": "「嗚嚕嚕……吼……（巴納比痛苦地喘息著，頸部有深深的抓痕，眼中泛起嗜血的紅光，狼毒正在侵蝕牠的理智！需盡快餵服解藥！）」",
+      "options": []
+    }
+  },
+  "luna": {
+    "PEACEFUL": {
+      "greeting": "「喵～（黑白貓露娜優雅地蹲在修道院石柱上梳理鬍鬚，腳步輕巧靈活，神情悠閒無比）」",
+      "options": [
+        {
+          "id": "cat_catch_mice",
+          "title": "捕滅糧倉老鼠",
+          "desc": "保護磨坊與修道院的穀物藥材不被啃咬",
+          "workX": 680,
+          "workName": "風車磨坊底層",
+          "cost": {},
+          "reward": { "food": 1 },
+          "duration": 8
+        },
+        {
+          "id": "cat_purr",
+          "title": "輕撫呼嚕聲",
+          "desc": "靈巧溫順的貓咪呼嚕聲令人心情放鬆",
+          "workX": 1640,
+          "workName": "修道院長椅",
+          "cost": {},
+          "reward": { "morale": 6 },
+          "duration": 4
+        }
+      ]
+    },
+    "ALERT": {
+      "greeting": "「喵嗚……（露娜瞳孔放大成滾圓狀，尾巴不住甩動，經常跳上高處張望黑夜中的樹冠）」",
+      "options": [
+        {
+          "id": "cat_roof_scout",
+          "title": "屋脊飛簷巡察",
+          "desc": "利用絕佳夜視能力在修道院屋頂巡視，捕捉夜動動靜",
+          "workX": 1550,
+          "workName": "修道院尖頂簷角",
+          "cost": {},
+          "reward": { "defense": 10 },
+          "duration": 6
+        },
+        {
+          "id": "cat_herb_guard",
+          "title": "守護晾曬草藥",
+          "desc": "驅趕試圖偷食附子草根部的夜間田鼠",
+          "workX": 1470,
+          "workName": "藥房外曬草架",
+          "cost": {},
+          "reward": { "aconite": 1 },
+          "duration": 10
+        }
+      ]
+    },
+    "FULL_MOON": {
+      "greeting": "「喵嘶——！（露娜弓起背脊，爪尖完全伸出，在月光下發出警惕的低嘯，牠感覺到了狂暴的獸性氣息）」",
+      "options": [
+        {
+          "id": "cat_distract_beast",
+          "title": "靈巧吸引注意",
+          "desc": "在房頂發出響聲引開衝擊民房的狂暴野狼",
+          "workX": 1300,
+          "workName": "民居瓦頂",
+          "cost": {},
+          "reward": { "defense": 15 },
+          "duration": 6
+        },
+        {
+          "id": "cat_comfort_nun",
+          "title": "陪伴修女身旁",
+          "desc": "在緊張的手術包紮桌旁用體溫給予傷員精神慰藉",
+          "workX": 1500,
+          "workName": "急救草棚",
+          "cost": {},
+          "reward": { "morale": 10 },
+          "duration": 6
+        }
+      ]
+    },
+    "DARK_MOON": {
+      "greeting": "「喵……（無月之夜的黑暗中，只有露娜的一對碧綠眼眸如幽火般閃亮，巡視著靜默的庭院）」",
+      "options": [
+        {
+          "id": "cat_night_vision",
+          "title": "綠瞳夜巡引路",
+          "desc": "在漆黑迴廊中引導修女搬運醫療物資",
+          "workX": 1600,
+          "workName": "修道院石階迴廊",
+          "cost": {},
+          "reward": { "morale": 8 },
+          "duration": 6
+        },
+        {
+          "id": "cat_sleep_hearth",
+          "title": "爐火旁小憩",
+          "desc": "安睡在溫暖爐邊，為安寧的小鎮增添一份安祥",
+          "workX": 1640,
+          "workName": "藥房壁爐旁",
+          "cost": {},
+          "reward": { "morale": 6 },
+          "duration": 4
+        }
+      ]
+    },
+    "INFECTED": {
+      "greeting": "「嘶嘶——吼！（露娜雙瞳泛著詭異血紅，黑色毛髮滲出紫色毒霧，痛苦地甩頭哈氣，狼毒已滲透靈貓！請迅速餵服解藥！）」",
+      "options": []
+    }
+  }
+};

@@ -1,0 +1,319 @@
+/**
+ * hud.css - 遊戲 HUD 與天幕大月相樣式
+ * 包含頂部數據條、右上角真實大月相、底部中央公曆/農曆對照 HUD
+ */
+
+/* 1. 頂部數據條 */
+#top-hud-bar {
+  position: fixed;
+  top: 14px;
+  left: 20px;
+  right: 180px; /* 避開右上角大月相 */
+  height: 52px;
+  background: rgba(22, 28, 42, 0.92);
+  border: 2.5px solid #dcd3be;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #8d7b68, 0 8px 16px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 18px;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.resource-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.res-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #f5f0e3;
+  font-size: 14px;
+  font-weight: bold;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.res-item.healing-res {
+  color: #d7f3df;
+  padding-left: 7px;
+  border-left: 1px solid rgba(255,255,255,.18);
+}
+
+.casualty-res {
+  min-width: 58px;
+  padding: 4px 7px;
+  border-left: 1px solid rgba(255,255,255,.18);
+  border-radius: 7px;
+  color: #f3d9d8;
+  transition: background .2s ease, color .2s ease;
+}
+
+.casualty-label { font-size: 11px; font-weight: 800; }
+.casualty-detail { display: none; }
+.casualty-res.has-casualties { background: rgba(130, 21, 27, .62); color: #fff1ed; animation: casualty-alert 1.5s ease-in-out infinite; }
+.casualty-res.has-casualties .casualty-detail { color: #ffd7d0; }
+@keyframes casualty-alert { 50% { box-shadow: 0 0 10px rgba(227, 69, 65, .72); } }
+
+.res-icon {
+  font-size: 16px;
+}
+
+/* 玩家守望點數（黃金琥珀紙牌徽章） */
+.action-points-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #42301c 0%, #2b1f12 100%);
+  border: 1.5px solid #ffb300;
+  border-radius: 16px;
+  padding: 4px 9px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.turn-countdown-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e9edf1;
+  white-space: nowrap;
+  font-size: 12px;
+  flex: 0 0 auto;
+}
+
+.turn-countdown-label { color: #b9c9d7; font-weight: 700; }
+#turn-countdown-value { color: #ffe082; font-size: 15px; min-width: 38px; }
+.turn-countdown-bar { width: 62px; height: 6px; overflow: hidden; border: 1px solid #90a4ae; border-radius: 8px; background: #263238; }
+#turn-countdown-fill { width: 0; height: 100%; background: linear-gradient(90deg, #6ad1ef, #ffe082); transition: width .35s linear; }
+
+.ap-icon {
+  font-size: 16px;
+  animation: ap-pulse 2s infinite ease-in-out;
+}
+
+@keyframes ap-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 4px #ffd54f); }
+}
+
+.ap-title {
+  color: #ffe082;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.ap-value {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.ap-value strong {
+  color: #ffd54f;
+  font-size: 15px;
+}
+
+.ap-sub {
+  color: #ffecb3;
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.ap-value.ap-depleted {
+  color: #ff5252;
+}
+.ap-value.ap-depleted strong {
+  color: #ff5252;
+}
+
+/* 防禦警戒度條 */
+.defense-meter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.meter-title {
+  color: #e0e0e0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.defense-bar-outer {
+  width: 140px;
+  height: 12px;
+  background: #263238;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#defense-bar-fill {
+  width: 65%;
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.defense-val {
+  font-size: 13px;
+  color: #ffd54f;
+  font-weight: bold;
+  min-width: 38px;
+}
+
+/* 課堂調試捷徑按鈕 */
+.hud-shortcuts {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.music-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding-left: 9px;
+  border-left: 1px solid rgba(255,255,255,.22);
+  color: #ffe9a8;
+  font-size: 11px;
+  font-weight: bold;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.music-toggle-btn {
+  min-width: 27px;
+  height: 25px;
+  border: 1px solid #cbb48b;
+  border-radius: 5px;
+  background: #314250;
+  color: #fff0ae;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.music-toggle-btn.is-muted { color: #8a9aa4; background: #25313a; }
+#bgm-volume { width: 70px; accent-color: #e3b85c; cursor: ew-resize; }
+#bgm-volume-label { min-width: 28px; }
+
+.hud-pill-btn {
+  background: #37474f;
+  border: 1.5px solid #90a4ae;
+  color: #eceff1;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 0 #1c272b;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+/* 中型螢幕維持單列：非核心的教堂補給改以滑鼠提示呈現，不壓壞主控資訊。 */
+@media (max-width: 1500px) {
+  #top-hud-bar { left: 10px; right: 10px; padding: 0 10px; gap: 7px; }
+  .resource-group { gap: 5px; }
+  .resource-group .church-res { display: none; }
+  .resource-group .healing-res { padding-left: 4px; }
+  .defense-bar-outer { width: 92px; }
+  #bgm-volume { width: 46px; }
+  .hud-pill-btn { padding: 4px 7px; }
+}
+
+.end-class-btn {
+  border-color: #c9974d;
+  color: #ffe6ad;
+  background: linear-gradient(180deg, #51402d, #2c231a);
+}
+
+.end-class-btn:hover { background: linear-gradient(180deg, #6a5137, #392a1d); }
+
+.hud-pill-btn:hover {
+  background: #455a64;
+}
+
+.hud-pill-btn.goal-pill-btn {
+  background: linear-gradient(135deg, #3e2723 0%, #4e342e 100%);
+  border: 1.5px solid #ffd54f;
+  color: #fff9c4;
+}
+
+.hud-pill-btn.goal-pill-btn:hover {
+  background: linear-gradient(135deg, #4e342e 0%, #5d4037 100%);
+  transform: translateY(-1px);
+}
+
+/* 2. 底部中央 HUD：雙曆整合對照 */
+#bottom-calendar-hud {
+  position: fixed;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #2b241b 0%, #1a1714 100%);
+  border: 2.5px solid #cbb48b;
+  border-radius: 24px;
+  box-shadow: 0 6px 0 #15110c, 0 10px 20px rgba(0,0,0,0.6);
+  padding: 5px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* 低於 NPC，避免底部日曆 HUD 蓋住角色的腳與名字。 */
+  z-index: 8;
+  pointer-events: auto;
+  cursor: pointer;
+  color: #faebd7;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.cal-gregorian {
+  color: #81d4fa;
+}
+
+.cal-divider {
+  color: #8d6e63;
+}
+
+.cal-lunar {
+  color: #ffe082;
+}
+
+.cal-phase-tag {
+  background: #3e2723;
+  color: #ffcc80;
+  border: 1px solid #d7ccc8;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* 月相標籤動態配色 */
+.cal-phase-tag.phase-new_moon {
+  background: #212121;
+  color: #ff5252;
+  border-color: #ff5252;
+}
+
+.cal-phase-tag.phase-full_moon {
+  background: #e0f7fa;
+  color: #006064;
+  border-color: #00acc1;
+  font-weight: 900;
+}

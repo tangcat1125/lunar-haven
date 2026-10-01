@@ -1,0 +1,309 @@
+/**
+ * paper-effects.css - 厚紙卡剪裁去背風格 (Paper-cut Standee FX)
+ * 具備白卡紙修邊、厚度側影、木版印刷質感與 3D 翻轉效果
+ */
+
+/* 1. 厚紙立牌主體容器 */
+.paper-standee-npc {
+  position: absolute;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: bottom center;
+  z-index: 10;
+}
+
+.paper-standee-npc:hover {
+  transform: scale(1.08) translateY(-6px);
+  z-index: 25;
+}
+
+.standee-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 800px;
+}
+
+/* 2. 厚紙卡身軀（雙層白邊與木刻陰影） */
+.paper-card-body {
+  position: relative;
+  width: 58px;
+  height: 85px;
+  border-radius: 8px 8px 3px 3px;
+  border: 3.5px solid #faf6ee; /* 白卡紙修邊 */
+  box-shadow: 
+    0 4px 0 #d7cec1,           /* 厚紙側切面厚度 */
+    0 8px 12px rgba(0, 0, 0, 0.45); /* 落地深投影 */
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 純剪紙立牌 (無底座，無卡框，直接站立於地面) */
+.paper-card-body.standee-has-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 150px;
+  height: 225px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.standee-char-img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 所有角色（包含動物）統一套用白卡紙外輪廓與落地陰影。 */
+  filter:
+    drop-shadow(0 0 1.5px #fff)
+    drop-shadow(0 0 1.5px #fff)
+    drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+.werewolf-standee-img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px #b71c1c) drop-shadow(0 5px 8px rgba(0, 0, 0, .64));
+  pointer-events: none;
+}
+
+/* 3. 翻面異變狼人特效 (Card Flip) */
+.paper-standee-npc.is-werewolf-flip .paper-card-body {
+  transform: rotateY(180deg);
+}
+
+.paper-cut-figure {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backface-visibility: hidden;
+  background-image: 
+    radial-gradient(rgba(0,0,0,0.06) 15%, transparent 16%),
+    radial-gradient(rgba(0,0,0,0.06) 15%, transparent 16%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+.werewolf-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #3e2723;
+  border: 2px solid #b71c1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  font-size: 32px;
+  box-shadow: inset 0 0 10px #000;
+}
+
+/* 4. 左右微擺小跑步伐動畫 (Waddling Walking Cycle) */
+@keyframes standee-waddle {
+  0% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-3deg) translateY(-2px); }
+  50% { transform: rotate(0deg) translateY(0); }
+  75% { transform: rotate(3deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+/* 待機時不播放全角色旋轉動畫；角色的移動必須由世界座標 left 驅動。 */
+.paper-standee-npc {
+  animation: none;
+}
+
+/* 悠閒左右漫步巡遊動畫：只做踩步，不用旋轉冒充水平移動。
+   真正的左右移動由 NPC.tick() 每幀更新世界座標 left。 */
+@keyframes standee-walk {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-3px) scaleY(1.02); }
+  100% { transform: translateY(0) scaleY(0.98); }
+}
+
+.paper-standee-npc.is-walking {
+  animation: standee-walk 0.32s infinite ease-in-out !important;
+  z-index: 20;
+}
+
+/* 快步奔赴工作地點動畫 (Running to Work) */
+@keyframes standee-run {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-5px) scaleY(1.02); }
+  100% { transform: translateY(0) scaleY(0.98); }
+}
+
+.paper-standee-npc.is-running {
+  animation: standee-run 0.35s infinite alternate ease-in-out !important;
+  z-index: 30;
+}
+
+/* 工坊作業中上下鍛造/調配律動 (Working Action) */
+@keyframes standee-work {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-4px) scaleY(1.04); }
+  100% { transform: translateY(0) scaleY(0.97); }
+}
+
+.paper-standee-npc.is-working {
+  animation: standee-work 0.65s infinite ease-in-out !important;
+}
+
+/* 點擊回饋：原地清楚晃動兩下，再開啟最上層臉部對談特寫。 */
+@keyframes standee-click-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-6px) rotate(-5deg); }
+  50% { transform: translateX(6px) rotate(5deg); }
+  75% { transform: translateX(-4px) rotate(-3deg); }
+}
+
+.paper-standee-npc.is-clicked-shake {
+  animation: standee-click-shake 0.22s 2 ease-in-out !important;
+  z-index: 80;
+}
+
+/* 前往地點標籤 (Work destination bubble) */
+.standee-work-tag {
+  position: absolute;
+  top: -38px;
+  background: rgba(22, 28, 42, 0.95);
+  color: #ffd54f;
+  border: 1px solid #ffd54f;
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 20;
+  animation: tag-float 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes tag-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+/* 5. 自然地面微陰影 (無木底座，柔和接地) */
+.standee-shadow {
+  width: 108px;
+  height: 7px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.12) 60%, transparent 80%);
+  border-radius: 50%;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+/* 6. 頭頂微光與打勾氣泡 */
+.standee-badge-bubble {
+  position: absolute;
+  top: -24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  font-weight: bold;
+  user-select: none;
+  z-index: 15;
+}
+
+.ready-check {
+  width: 26px;
+  height: 26px;
+  background: #4caf50;
+  border: 2px solid #ffffff;
+  color: #fff;
+  font-size: 16px;
+  animation: bounce-check 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes bounce-check {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.quest-glow {
+  width: 18px;
+  height: 18px;
+  background: #ffd54f;
+  color: #5d4037;
+  font-size: 12px;
+  border: 1.5px solid #fff;
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* 待機狀態不顯示任務提示點；工作完成的綠色勾勾仍保留作為可領取回饋。 */
+.quest-glow {
+  display: none !important;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 4px #ffd54f; }
+  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 12px #ffca28; }
+  100% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 4px #ffd54f; }
+}
+
+/* 7. 作業進度條 */
+.standee-progress-bar {
+  position: absolute;
+  top: -12px;
+  width: 48px;
+  height: 6px;
+  background: #37474f;
+  border: 1px solid #cfd8dc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.standee-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #00e676;
+  transition: width 0.3s linear;
+}
+
+/* 8. 感染爪痕與紫污濾鏡 */
+.paper-standee-npc.is-infected .paper-card-body {
+  border-color: #ff5252;
+  box-shadow: 0 4px 0 #b71c1c, 0 8px 18px rgba(255, 23, 68, 0.72);
+}
+
+/* 受咬守犬直接換成血痕狼犬素材，而不是只用紅框表示感染。 */
+.paper-standee-npc.barnaby.is-infected .standee-char-img,
+.paper-standee-npc.barnaby_patrol_2.is-infected .standee-char-img {
+  filter: drop-shadow(0 0 9px rgba(183, 28, 28, .9)) drop-shadow(0 5px 8px rgba(0,0,0,.65));
+}
+
+@keyframes infected-stagger {
+  0%, 100% { transform: translate(-2px, 0) rotate(-1deg); filter: drop-shadow(0 0 3px rgba(255,0,0,0.35)); }
+  35% { transform: translate(3px, -3px) rotate(2deg); filter: drop-shadow(0 0 14px rgba(255,0,0,0.95)); }
+  70% { transform: translate(-1px, 2px) rotate(-2deg); filter: drop-shadow(0 0 7px rgba(255,0,0,0.62)); }
+}
+
+.paper-standee-npc.is-infected {
+  animation: infected-stagger 0.72s infinite ease-in-out !important;
+}
+
+.paper-standee-npc.is-infected .paper-cut-figure::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle, rgba(142, 36, 170, 0.35) 0%, transparent 80%);
+  pointer-events: none;
+}

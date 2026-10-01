@@ -1,0 +1,174 @@
+/**
+ * teacher.css - 教師課堂設定與遊戲結束條件面板樣式
+ * 支援 6 大結束條件下拉與子選單即時自訂（免密碼）
+ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 14, 22, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  backdrop-filter: blur(6px);
+}
+
+.modal-content-body {
+  background: #fbf7ee;
+  border: 4px solid #8d7b68;
+  border-radius: 12px;
+  box-shadow: 0 10px 0 #5b4e3f, 0 20px 40px rgba(0, 0, 0, 0.65);
+  padding: 26px 32px;
+  max-width: 680px;
+  width: 92%;
+  box-sizing: border-box;
+  animation: modal-pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modal-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.panel-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed #bcaaa4;
+  padding-bottom: 10px;
+}
+
+.panel-header-row h3 {
+  margin: 0;
+  color: #3e2723;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+.close-x-btn {
+  background: #d7ccc8;
+  border: 1px solid #8d6e63;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #4e342e;
+}
+
+.close-x-btn:hover {
+  background: #bcaaa4;
+}
+
+.panel-desc {
+  font-size: 14px;
+  color: #5d4037;
+  margin: 10px 0 16px;
+}
+
+.form-group {
+  margin-top: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3e2723;
+  margin-bottom: 6px;
+}
+
+.teacher-select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 2px solid #8d6e63;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #3e2723;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.teacher-select:focus {
+  border-color: #3e2723;
+  box-shadow: 0 0 6px rgba(141, 110, 99, 0.4);
+}
+
+.preset-detail-tip {
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #efebe9;
+  border-left: 4px solid #8d6e63;
+  color: #4e342e;
+  font-size: 13px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* 即時小鎮狀況卡片 */
+.current-town-status-card {
+  margin-top: 18px;
+  background: #f5eedc;
+  border: 1.5px solid #d7ccc8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.status-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sc-label {
+  font-size: 11px;
+  color: #795548;
+}
+
+.sc-val {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-top: 2px;
+}
+
+/* 按鈕欄 */
+.form-action-row {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.test-btn {
+  background: #fff8e1;
+  color: #b78103;
+  border: 2px solid #fbc02d;
+  box-shadow: 0 3px 0 #f57f17;
+  font-size: 13px;
+}
+
+.test-btn:hover {
+  background: #fffde7;
+}
+
+.save-btn {
+  background: #2e7d32;
+  color: #ffffff;
+  border: 2px solid #1b5e20;
+  box-shadow: 0 4px 0 #1b5e20;
+}
+
+.save-btn:hover {
+  background: #388e3c;
+}
